@@ -1,0 +1,72 @@
+
+name: Deploy Enterprise Talent Portal
+
+on:
+  workflow_dispatch: # Manual trigger
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: Development # You can change this to match your Azure environment if using Environments in GitHub.
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20' # Specify the Node.js version suitable for your project
+
+    - name: Install Frontend Dependencies
+      run: npm install
+      working-directory: ./frontend
+
+    - name: Build Frontend
+      run: npm run build
+      working-directory: ./frontend
+      env:
+        # Pass environment variables needed for the frontend build (e.g., Vite variables)
+        VITE_USE_COSMOS_DB: '1' # Enable Cosmos DB for the frontend
+        VITE_COSMOS_DB_ENDPOINT: ${{ secrets.COSMOS_DB_ENDPOINT }}
+        VITE_COSMOS_DB_KEY: ${{ secrets.COSMOS_DB_KEY }}
+        VITE_COSMOS_DB_DATABASE_ID: ${{ secrets.COSMOS_DataBase }}
+        VITE_COSMOS_DB_CONTAINER_ID: ${{ secrets.COSMOS_Container }}
+
+    - name: Install Backend Dependencies
+      run: npm install
+      working-directory: ./backend
+
+    - name: Build Backend
+      run: npm run build
+      working-directory: ./backend
+
+    - name: Create Deployment Package
+      run: |
+        # Create the main deployment directory
+        mkdir -p ./deploy_package
+        # Copy backend build output to the root of the deployment package
+        cp -r ./backend/dist/* ./deploy_package/
+        # Create a 'public' subdirectory within the deployment package for frontend static files
+        mkdir -p ./deploy_package/public
+        # Copy frontend build output into the 'public' subdirectory
+        cp -r ./frontend/dist/* ./deploy_package/public/
+        # Copy backend .env to deploy_package, if not setting app settings in Azure directly
+        # cp ./backend/.env ./deploy_package/.env # Uncomment if you rely on .env file in Azure
+
+    - name: Deploy to Azure Web App
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'lts-employeeskillmatrix-dev' # As specified in the prompt
+        publish-profile: ${{ secrets.AZURE_SkillMatrix_PUBLISH_PROFILE_Dev }} # As specified in the prompt
+        package: ./deploy_package # Deploy the combined package
+        # Set the startup command for your Node.js application.
+        # It's 'node src/server.js' because the built backend server is in `deploy_package/src/server.js`
+        startupCommand: 'node src/server.js'
+
+    - name: Deployment Complete
+      run: echo "Deployment to Azure App Service 'lts-employeeskillmatrix-dev' is complete."
+    
