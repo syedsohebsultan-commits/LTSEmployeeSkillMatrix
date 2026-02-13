@@ -1,0 +1,27 @@
+
+{
+  "name": "talent-portal-backend",
+  "version": "1.0.0",
+  "description": "Node.js backend for the Enterprise Talent Portal",
+  "main": "dist/src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --loader ts-node/esm backend/src/server.ts",
+    "build": "tsc -p backend/tsconfig.json",
+    "dev": "nodemon --watch backend --ext ts --exec 'node --loader ts-node/esm' backend/src/server.ts"
+  },
+  "dependencies": {
+    "@azure/cosmos": "^3.17.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.9",
+    "@types/express": "^4.17.21",
+    "@types/cors": "^2.8.17",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  }
+}
