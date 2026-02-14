@@ -1,9 +1,9 @@
 
 import { CosmosClient, Container, Database } from '@azure/cosmos';
 // Corrected import path for UserProfile, Persona, TeamMemberSummary, ClientFeedback
-import { UserProfile, Persona, TeamMemberSummary, ClientFeedback } from './shared/types'; 
+import { UserProfile, Persona, TeamMemberSummary, ClientFeedback } from './shared/types.ts'; 
 // Corrected import path for MOCK_CURRENT_USER, PERSONAS, MOCK_TEAM_MEMBERS
-import { MOCK_CURRENT_USER, PERSONAS, MOCK_TEAM_MEMBERS } from './shared/mockData';
+import { MOCK_CURRENT_USER, PERSONAS, MOCK_TEAM_MEMBERS } from './shared/mockData.ts';
 
 export class CosmosDbService {
   private client: CosmosClient;

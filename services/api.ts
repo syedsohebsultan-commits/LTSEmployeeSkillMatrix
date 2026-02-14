@@ -1,9 +1,9 @@
 
 
 // Corrected import path for UserProfile, TeamMemberSummary, ClientFeedback, Persona
-import { UserProfile, TeamMemberSummary, ClientFeedback, Persona } from './shared/types';
+import { UserProfile, TeamMemberSummary, ClientFeedback, Persona } from '../shared/types.ts';
 // Corrected import path for MOCK_CURRENT_USER, PERSONAS, MOCK_TEAM_MEMBERS
-import { MOCK_CURRENT_USER, PERSONAS, MOCK_TEAM_MEMBERS } from './shared/mockData';
+import { MOCK_CURRENT_USER, PERSONAS, MOCK_TEAM_MEMBERS } from '../shared/mockData.ts';
 
 const BASE_URL = 'http://localhost:3001/api'; // URL of the Node.js backend
 

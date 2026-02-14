@@ -17,20 +17,20 @@ import {
   AlertCircle
 } from 'lucide-react';
 // Corrected import path for UserRole, UserProfile, Persona, TeamMemberSummary
-import { UserRole, UserProfile, Persona, TeamMemberSummary } from './shared/types'; 
-import { talentApi } from './services/api'; // Import the API service
+import { UserRole, UserProfile, Persona, TeamMemberSummary } from './shared/types.ts'; 
+import { talentApi } from './services/api.ts'; // Import the API service
 
 // Determine if using local storage
 const USE_LOCAL_STORAGE = import.meta.env.VITE_USE_COSMOS_DB === '0';
 
 // Pages
-import Dashboard from './pages/Dashboard';
-import Profile from './pages/Profile';
-import Skills from './pages/Skills';
-import Team from './pages/Team';
-import Learning from './pages/Learning';
-import Reviews from './pages/Reviews';
-import Career from './pages/Career';
+import Dashboard from './pages/Dashboard.tsx';
+import Profile from './pages/Profile.tsx';
+import Skills from './pages/Skills.tsx';
+import Team from './pages/Team.tsx';
+import Learning from './pages/Learning.tsx';
+import Reviews from './pages/Reviews.tsx';
+import Career from './pages/Career.tsx';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard');

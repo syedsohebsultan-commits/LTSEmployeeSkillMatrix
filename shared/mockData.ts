@@ -1,5 +1,5 @@
 
-import { UserRole, UserProfile, Persona, TeamMemberSummary, ClientFeedback } from './types.ts';
+import { UserRole, UserProfile, Persona, TeamMemberSummary, ClientFeedback } from './types';
 
 export const PERSONAS: Persona[] = [
   {
