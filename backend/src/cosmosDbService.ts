@@ -1,7 +1,7 @@
 
 import { CosmosClient, Container, Database } from '@azure/cosmos';
-import { UserProfile, Persona, TeamMemberSummary, ClientFeedback } from '../../shared/types';
-import { MOCK_CURRENT_USER, PERSONAS, MOCK_TEAM_MEMBERS } from '../../shared/mockData';
+import { UserProfile, Persona, TeamMemberSummary, ClientFeedback } from '../../shared/types.ts';
+import { MOCK_CURRENT_USER, PERSONAS, MOCK_TEAM_MEMBERS } from '../../shared/mockData.ts';
 
 export class CosmosDbService {
   private client: CosmosClient;
@@ -61,8 +61,8 @@ export class CosmosDbService {
     }
     const entities = [
         { ...MOCK_CURRENT_USER, type: 'userProfile' }, // Add a type to distinguish entities
-        ...PERSONAS.map(p => ({ ...p, type: 'persona' })),
-        ...MOCK_TEAM_MEMBERS.map(member => ({ ...member, type: 'teamMember' }))
+        ...PERSONAS.map((p: Persona) => ({ ...p, type: 'persona' })),
+        ...MOCK_TEAM_MEMBERS.map((member: TeamMemberSummary) => ({ ...member, type: 'teamMember' }))
     ];
 
     for (const entity of entities) {

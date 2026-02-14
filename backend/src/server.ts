@@ -2,8 +2,8 @@
 import express from 'express';
 import * as path from 'path'; // Import path module
 import cors from 'cors'; // Import cors middleware
-import { MOCK_CURRENT_USER, PERSONAS, MOCK_TEAM_MEMBERS } from '../../shared/mockData';
-import { UserProfile, Persona, TeamMemberSummary, ClientFeedback } from '../../shared/types';
+import { MOCK_CURRENT_USER, PERSONAS, MOCK_TEAM_MEMBERS } from '../../shared/mockData.ts';
+import { UserProfile, Persona, TeamMemberSummary, ClientFeedback } from '../../shared/types.ts';
 import { cosmosDbService } from './cosmosDbService.ts';
 
 // Load environment variables
@@ -16,7 +16,7 @@ const USE_COSMOS_DB = process.env.USE_COSMOS_DB === '1';
 // In-memory data store (using mutable mock data for demonstration)
 let currentUser: UserProfile = { ...MOCK_CURRENT_USER };
 let personas: Persona[] = [...PERSONAS];
-let teamMembers: TeamMemberSummary[] = MOCK_TEAM_MEMBERS.map(member => ({
+let teamMembers: TeamMemberSummary[] = MOCK_TEAM_MEMBERS.map((member: TeamMemberSummary) => ({
   ...member,
   feedbacks: member.feedbacks ? [...member.feedbacks] : []
 }));
