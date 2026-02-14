@@ -2,8 +2,8 @@
 import express from 'express';
 import * as path from 'path'; // Import path module
 import cors from 'cors'; // Import cors middleware
-import { MOCK_CURRENT_USER, PERSONAS, MOCK_TEAM_MEMBERS } from '../../shared/mockData';
-import { UserProfile, Persona, TeamMemberSummary, ClientFeedback } from '../../shared/types';
+import { MOCK_CURRENT_USER, PERSONAS, MOCK_TEAM_MEMBERS } from '@shared/mockData';
+import { UserProfile, Persona, TeamMemberSummary, ClientFeedback } from '@shared/types';
 import { cosmosDbService } from './cosmosDbService';
 
 // Load environment variables
