@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { TeamMemberSummary, ClientFeedback, Sentiment } from '../../../shared/types';
+import { TeamMemberSummary, ClientFeedback, Sentiment } from '../types/types';
 import { 
   Search, 
   UserPlus, 

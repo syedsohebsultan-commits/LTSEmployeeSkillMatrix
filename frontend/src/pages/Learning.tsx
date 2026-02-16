@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { UserProfile } from '../../../shared/types';
+import { UserProfile } from '../types/types';
 import { 
   PlayCircle, 
   ExternalLink, 

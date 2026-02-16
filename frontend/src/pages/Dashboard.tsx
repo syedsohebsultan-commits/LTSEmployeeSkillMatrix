@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { UserProfile, Persona } from '../../../shared/types';
+import { UserProfile, Persona } from '../types/types';
 import StatCard from '../components/StatCard.tsx';
 import { 
   Trophy, 

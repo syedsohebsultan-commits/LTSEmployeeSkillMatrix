@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { UserProfile } from '../../../shared/types';
+import { UserProfile } from '../types/types';
 // Add missing User, Award, and ChevronRight imports from lucide-react
 import { Mail, Briefcase, MapPin, Building, Calendar, Edit3, Shield, Linkedin, Github, User, Award, ChevronRight } from 'lucide-react';
 

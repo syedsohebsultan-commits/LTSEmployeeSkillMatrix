@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { UserProfile, Skill, SkillLevel } from '../../../shared/types';
+import { UserProfile, Skill, SkillLevel } from '../types/types';
 import { 
   Plus, 
   Search, 

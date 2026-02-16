@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { UserProfile, Persona, SkillLevel } from '../../../shared/types';
+import { UserProfile, Persona, SkillLevel, Skill, Review } from '../types/types';
 import { 
   Zap, 
   ArrowRight, 
@@ -26,8 +26,8 @@ const Career: React.FC<CareerProps> = ({ user, personas }) => {
     return labels[level - 1];
   };
 
-  const skillGaps = user.skills.map(skill => {
-    const nextReq = nextPersona?.requiredSkills.find(rs => rs.skillId === skill.id)?.minLevel || 0;
+  const skillGaps = user.skills.map((skill: Skill) => {
+    const nextReq = nextPersona?.requiredSkills.find((rs: Review) => rs.skillId === skill.id)?.minLevel || 0;
     return {
       name: skill.name,
       current: skill.currentLevel,
