@@ -71,6 +71,17 @@ export interface UserProfile {
   reviews: Review[];
 }
 
+export interface ClientFeedback {
+  id: string;
+  clientName: string;
+  projectName: string;
+  rating: number;
+  comment: string;
+  date: string;
+  sentiment?: Sentiment;
+  status?: FeedbackStatus;
+}
+
 export interface TeamMemberSummary {
   id: string;
   name: string;
