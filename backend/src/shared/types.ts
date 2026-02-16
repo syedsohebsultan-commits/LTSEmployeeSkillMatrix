@@ -73,11 +73,13 @@ export interface UserProfile {
 
 export interface ClientFeedback {
   id: string;
+  clientId: string;
   clientName: string;
-  projectName: string;
-  rating: number;
-  comment: string;
+  projectName?: string;
+  rating?: number;
+  content: string;
   date: string;
+  linkedSkillId?: string;
   sentiment?: Sentiment;
   status?: FeedbackStatus;
 }
