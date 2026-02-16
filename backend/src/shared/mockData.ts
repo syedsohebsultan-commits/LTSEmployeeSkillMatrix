@@ -1,4 +1,4 @@
-import { UserProfile, Persona, TeamMemberSummary } from './types'
+import { UserRole, UserProfile, Persona, TeamMemberSummary } from './types'
 
 export const MOCK_CURRENT_USER: UserProfile = {
   id: '1',
