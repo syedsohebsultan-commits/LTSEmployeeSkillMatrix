@@ -15,7 +15,7 @@ import {
   Loader2,
   AlertCircle
 } from 'lucide-react';
-import { UserRole, UserProfile, Persona, TeamMemberSummary } from '../types/types'; 
+import { UserRole, UserProfile, Persona, TeamMemberSummary } from './types/types'; 
 import { talentApi } from './services/api.ts'; // Corrected import to include .ts extension
 
 // Determine if using local storage
