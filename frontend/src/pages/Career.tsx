@@ -27,7 +27,7 @@ const Career: React.FC<CareerProps> = ({ user, personas }) => {
   };
 
   const skillGaps = user.skills.map((skill: Skill) => {
-    const nextReq = nextPersona?.requiredSkills.find((rs: Review) => rs.skillId === skill.id)?.minLevel || 0;
+    const nextReq = nextPersona?.requiredSkills.find(rs => rs.skillId === skill.id)?.minLevel || 0;
     return {
       name: skill.name,
       current: skill.currentLevel,

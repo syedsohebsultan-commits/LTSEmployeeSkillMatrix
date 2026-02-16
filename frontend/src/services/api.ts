@@ -1,6 +1,6 @@
 
-import { UserProfile, TeamMemberSummary, ClientFeedback, Persona } from '../../../shared/types';
-import { MOCK_CURRENT_USER, PERSONAS, MOCK_TEAM_MEMBERS } from '../../../shared/mockData';
+import { UserProfile, TeamMemberSummary, ClientFeedback, Persona } from '../types/types';
+import { MOCK_CURRENT_USER, PERSONAS, MOCK_TEAM_MEMBERS } from '../types/types';
 
 const BASE_URL = 'http://localhost:3001/api'; // URL of the Node.js backend
 
