@@ -64,8 +64,8 @@ jobs:
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }} # As specified in the prompt
         package: ./deploy_package # Deploy the combined package
         # Set the startup command for your Node.js application.
-        # It's 'node src/server.js' because the built backend server is in `deploy_package/src/server.js`
-        startupCommand: 'node src/server.js'
+        # It's 'node server.js' because the built backend server is in `deploy_package/src/server.js`
+        startupCommand: 'node server.js'
 
     - name: Deployment Complete
       run: echo "Deployment to Azure App Service 'lts-employeeskillmatrix' is complete."
