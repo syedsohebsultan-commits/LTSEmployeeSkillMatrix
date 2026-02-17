@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
   "dev": "vite",
-  "build": "vite build && tsc server.ts --outDir dist --module esnext --target esnext --moduleResolution node --allowSyntheticDefaultImports",
+  "build": "vite build && tsc server.ts --outDir dist --module ESNext --moduleResolution bundler --allowSyntheticDefaultImports --target ESNext",
   "start": "node dist/server.js",
   "preview": "vite preview"
 },
