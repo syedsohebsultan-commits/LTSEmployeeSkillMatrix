@@ -48,7 +48,7 @@ jobs:
         # Create the main deployment directory
         mkdir -p ./deploy_package
         # Copy backend build output to the root of the deployment package
-        cp -r ./backend/dist/src/* ./deploy_package/
+        cp -r ./backend/dist/* ./deploy_package/
         cp ./backend/package.json ./deploy_package/
         # Create a 'public' subdirectory within the deployment package for frontend static files
         mkdir -p ./deploy_package/public
