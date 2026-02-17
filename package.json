@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
   "dev": "vite",
-  "build": "vite build && tsc server.ts --outDir dist --module ESNext --moduleResolution node --target ES2022 --allowSyntheticDefaultImports --esModuleInterop",
+  "build": "vite build && tsc server.ts --outDir dist --module ESNext --moduleResolution node --target ES2022 --allowSyntheticDefaultImports --esModuleInterop --noEmit false --skipLibCheck",
   "start": "node dist/server.js",
   "preview": "vite preview"
 },
