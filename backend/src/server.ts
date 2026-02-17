@@ -45,7 +45,7 @@ app.use(express.json());
 
 // Serve static files from the 'public' directory
 // In deployment, 'public' will contain the built React app
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // API Routes
 app.get('/api/profile', async (req, res) => {
@@ -134,7 +134,7 @@ app.post('/api/kudos/:memberId', async (req, res) => {
 // SPA fallback: For any other GET request, serve the index.html
 // This ensures client-side routing works for React.
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(PORT, () => {
