@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "description": "Node.js backend for the Enterprise Talent Portal",
   "main": "dist/src/server.js",
-  "type": "module",
   "scripts": {
     "start": "node server.js",
     "build": "tsc",
