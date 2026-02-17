@@ -8,7 +8,9 @@ import { cosmosDbService } from './cosmosDbService';
 
 // Load environment variables
 import dotenv from 'dotenv';
-dotenv.config({ path: 'backend/.env' }); // Explicitly define path to .env file
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+} // Explicitly define path to .env file
 
 const PORT = process.env.PORT || 3001;
 const USE_COSMOS_DB = process.env.USE_COSMOS_DB === '1';
