@@ -5,7 +5,7 @@ import { UserProfile, TeamMemberSummary, ClientFeedback, Persona } from '../shar
 // Corrected import path for MOCK_CURRENT_USER, PERSONAS, MOCK_TEAM_MEMBERS
 import { MOCK_CURRENT_USER, PERSONAS, MOCK_TEAM_MEMBERS } from '../shared/mockData.ts';
 
-const BASE_URL = 'http://localhost:3001/api'; // URL of the Node.js backend
+const BASE_URL = '/api'; // URL of the Node.js backend
 
 // Check the environment variable to determine the data source
 const USE_COSMOS_DB = import.meta.env.VITE_USE_COSMOS_DB === '1';

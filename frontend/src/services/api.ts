@@ -7,7 +7,7 @@ import {
 } from '../mocks/mockData'
 
 
-const BASE_URL = 'http://localhost:3001/api'; // URL of the Node.js backend
+const BASE_URL = window.location.origin; // This automatically uses your Azure URL
 
 // Check the environment variable to determine the data source
 const USE_COSMOS_DB = import.meta.env.VITE_USE_COSMOS_DB === '1';

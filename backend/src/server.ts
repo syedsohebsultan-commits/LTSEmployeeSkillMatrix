@@ -5,14 +5,18 @@ import cors from 'cors'; // Import cors middleware
 import { MOCK_CURRENT_USER, PERSONAS, MOCK_TEAM_MEMBERS } from './shared/mockData';
 import { UserProfile, Persona, TeamMemberSummary, ClientFeedback } from './shared/types';
 import { cosmosDbService } from './cosmosDbService';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 // Load environment variables
 import dotenv from 'dotenv';
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
 } // Explicitly define path to .env file
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8080;
 const USE_COSMOS_DB = process.env.USE_COSMOS_DB === '1';
 
 // In-memory data store (using mutable mock data for demonstration)
@@ -45,7 +49,8 @@ app.use(express.json());
 
 // Serve static files from the 'public' directory
 // In deployment, 'public' will contain the built React app
-app.use(express.static(path.join(__dirname, 'public')));
+const buildPath = path.resolve(__dirname, 'dist'); 
+app.use(express.static(buildPath));
 
 // API Routes
 app.get('/api/profile', async (req, res) => {
@@ -134,7 +139,7 @@ app.post('/api/kudos/:memberId', async (req, res) => {
 // SPA fallback: For any other GET request, serve the index.html
 // This ensures client-side routing works for React.
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(buildPath, 'index.html'));
 });
 
 app.listen(PORT, () => {
