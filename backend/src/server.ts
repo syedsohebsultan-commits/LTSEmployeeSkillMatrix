@@ -4,13 +4,9 @@ import cors from 'cors'; // Import cors middleware
 import { MOCK_CURRENT_USER, PERSONAS, MOCK_TEAM_MEMBERS } from './shared/mockData';
 import { UserProfile, Persona, TeamMemberSummary, ClientFeedback } from './shared/types';
 import { cosmosDbService } from './cosmosDbService';
-import { fileURLToPath } from 'url';
 import path from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-// Load environment variables
 import dotenv from 'dotenv';
+
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
 } // Explicitly define path to .env file
@@ -48,7 +44,7 @@ app.use(express.json());
 
 // Serve static files from the 'public' directory
 // In deployment, 'public' will contain the built React app
-const buildPath = path.resolve(__dirname, 'dist'); 
+const buildPath = path.resolve(process.cwd(), 'dist');
 app.use(express.static(buildPath));
 
 // API Routes
