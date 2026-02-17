@@ -57,6 +57,11 @@ jobs:
         # Copy backend .env to deploy_package, if not setting app settings in Azure directly
         # cp ./backend/.env ./deploy_package/.env # Uncomment if you rely on .env file in Azure
 
+    - name: Install production dependencies
+      run: |
+        cd deploy_package
+        npm install --omit=dev
+
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
