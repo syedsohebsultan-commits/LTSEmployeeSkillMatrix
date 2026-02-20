@@ -1,15 +1,14 @@
-
 name: Deploy Enterprise Talent Portal
 
 on:
-  workflow_dispatch: # Manual trigger
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     environment:
-      name: Development # You can change this to match your Azure environment if using Environments in GitHub.
+      name: Development
 
     steps:
     - name: Checkout Repository
@@ -18,8 +17,11 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20' # Specify the Node.js version suitable for your project
+        node-version: '20'
 
+    # -------------------------
+    # FRONTEND BUILD (VITE)
+    # -------------------------
     - name: Install Frontend Dependencies
       run: npm install
       working-directory: ./frontend
@@ -28,13 +30,15 @@ jobs:
       run: npm run build
       working-directory: ./frontend
       env:
-        # Pass environment variables needed for the frontend build (e.g., Vite variables)
-        VITE_USE_COSMOS_DB: '1' # Enable Cosmos DB for the frontend
+        VITE_USE_COSMOS_DB: '1'
         VITE_COSMOS_DB_ENDPOINT: ${{ secrets.COSMOS_DB_ENDPOINT }}
         VITE_COSMOS_DB_KEY: ${{ secrets.COSMOS_DB_KEY }}
         VITE_COSMOS_DB_DATABASE_ID: ${{ secrets.COSMOS_DataBase }}
         VITE_COSMOS_DB_CONTAINER_ID: ${{ secrets.COSMOS_Container }}
 
+    # -------------------------
+    # BACKEND BUILD (TSC)
+    # -------------------------
     - name: Install Backend Dependencies
       run: npm install
       working-directory: ./backend
@@ -43,43 +47,59 @@ jobs:
       run: npm run build
       working-directory: ./backend
 
-    - name: Inspect Deploy Package
-      run: |
-        echo "Backend:"
-        ls -R ./backend/build
-        echo "Frontend:"
-        ls -R ./frontend/dist
-
+    # -------------------------
+    # CREATE DEPLOY PACKAGE
+    # -------------------------
     - name: Create Deployment Package
       run: |
-        # Create the main deployment directory
-        mkdir -p ./deploy_package
-        # Copy backend build output to the root of the deployment package
-        cp -r ./backend/build/* ./deploy_package/
-        cp ./backend/package.json ./deploy_package/
-        # Create a 'public' subdirectory within the deployment package for frontend static files
-        mkdir -p ./deploy_package/public
-        # Copy frontend dist output into the 'public' subdirectory
-        cp -r ./frontend/dist/* ./deploy_package/public/
-        # Copy backend .env to deploy_package, if not setting app settings in Azure directly
-        # cp ./backend/.env ./deploy_package/.env # Uncomment if you rely on .env file in Azure
+        echo "Creating deployment folder..."
+        mkdir -p deploy_package
 
-    - name: Install production dependencies
+        echo "Copy backend build output..."
+        # Ensure server.js exists
+        ls -la backend/build
+
+        # Copy compiled backend files to root
+        cp backend/build/server.js deploy_package/
+        cp -r backend/build/*.js deploy_package/ || true
+
+        echo "Copy package.json..."
+        cp backend/package.json deploy_package/
+
+        echo "Create public folder..."
+        mkdir -p deploy_package/public
+
+        echo "Copy frontend dist..."
+        ls -la frontend/dist
+        cp -r frontend/dist/* deploy_package/public/
+
+    # -------------------------
+    # INSTALL PROD DEPENDENCIES
+    # -------------------------
+    - name: Install Production Dependencies
       run: |
         cd deploy_package
         npm install --omit=dev
+        ls -la
 
+    # -------------------------
+    # FINAL STRUCTURE CHECK
+    # -------------------------
+    - name: Verify Deployment Structure
+      run: |
+        echo "Final deploy structure:"
+        ls -R deploy_package
+
+    # -------------------------
+    # DEPLOY TO AZURE
+    # -------------------------
     - name: Deploy to Azure Web App
-      id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'lts-employeeskillmatrix' # As specified in the prompt
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }} # As specified in the prompt
-        package: ./deploy_package # Deploy the combined package
-        # Set the startup command for your Node.js application.
-        # It's 'node server.js' because the built backend server is in `deploy_package/src/server.js`
+        app-name: 'lts-employeeskillmatrix'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ./deploy_package
         startupCommand: 'node server.js'
 
     - name: Deployment Complete
-      run: echo "Deployment to Azure App Service 'lts-employeeskillmatrix' is complete."
-    
+      run: echo "Deployment to Azure App Service is complete."
