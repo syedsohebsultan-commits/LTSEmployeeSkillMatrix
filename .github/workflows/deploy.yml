@@ -43,6 +43,13 @@ jobs:
       run: npm run build
       working-directory: ./backend
 
+    - name: Inspect Deploy Package
+      run: |
+        echo "Backend:"
+        ls -R ./backend/build
+        echo "Frontend:"
+        ls -R ./frontend/dist
+
     - name: Create Deployment Package
       run: |
         # Create the main deployment directory
@@ -52,8 +59,8 @@ jobs:
         cp ./backend/package.json ./deploy_package/
         # Create a 'public' subdirectory within the deployment package for frontend static files
         mkdir -p ./deploy_package/public
-        # Copy frontend build output into the 'public' subdirectory
-        cp -r ./frontend/build/* ./deploy_package/public/
+        # Copy frontend dist output into the 'public' subdirectory
+        cp -r ./frontend/dist/* ./deploy_package/public/
         # Copy backend .env to deploy_package, if not setting app settings in Azure directly
         # cp ./backend/.env ./deploy_package/.env # Uncomment if you rely on .env file in Azure
 

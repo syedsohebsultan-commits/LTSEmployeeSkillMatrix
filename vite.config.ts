@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [react()],
     build: {
-      outDir: 'build',       // Explicitly set output to dist
+      outDir: 'dist',       // Explicitly set output to dist
       emptyOutDir: false,   // Very important: don't let Vite wipe the folder if server.js is already there
     },
     define: {
