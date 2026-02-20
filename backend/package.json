@@ -1,13 +1,12 @@
-
 {
   "name": "talent-portal-backend",
   "version": "1.0.0",
   "description": "Node.js backend for the Enterprise Talent Portal",
-  "main": "dist/src/server.js",
+  "main": "build/server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node build/server.js",
     "build": "tsc",
-    "dev": "nodemon --watch src --ext ts --exec 'node --loader ts-node/esm' src/server.ts"
+    "dev": "nodemon --watch src --ext ts --exec \"node --loader ts-node/esm\" src/server.ts"
   },
   "dependencies": {
     "@azure/cosmos": "^3.17.1",

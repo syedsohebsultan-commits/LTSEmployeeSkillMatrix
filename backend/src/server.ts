@@ -43,7 +43,7 @@ app.use(express.json());
 
 // Serve static files from the 'public' directory
 // In deployment, 'public' will contain the built React app
-const buildPath = path.resolve(process.cwd(), 'dist');
+const buildPath = path.resolve(process.cwd(), 'public');
 app.use(express.static(buildPath));
 
 // API Routes
